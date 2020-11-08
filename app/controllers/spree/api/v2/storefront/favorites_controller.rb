@@ -43,6 +43,12 @@ module Spree
             render_serialized_payload { serialize_resource(favorite) }
           end
 
+          def empty
+            require_spree_current_user
+            empty_service.call(user: spree_current_user)
+            render_serialized_payload { serialize_collection(paginated_collection) }
+          end
+
           private
           # THIS HAS BEEN MOVED TO BASE CONTROLLER
           def serialize_resource(resource)
@@ -103,6 +109,10 @@ module Spree
 
           def delete_service
             Spree::Api::V2::Storefront::Favorite::Delete
+          end
+
+          def empty_service
+            Spree::Api::V2::Storefront::Favorite::Empty
           end
 
           def paginated_collection

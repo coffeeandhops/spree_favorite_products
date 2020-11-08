@@ -162,4 +162,21 @@ describe 'Storefront API v2 Favorite spec', type: :request do
     end
 
   end
+
+  describe 'favorite#empty' do
+    before { delete "/api/v2/storefront/favorites/empty", headers: headers }
+
+    it_behaves_like 'returns 200 HTTP status'
+
+    it 'returns empty favorites' do
+      expect(json_response['data'].count).to eq(0)
+    end
+
+    context 'as a guest user' do
+      let(:headers) { {} }
+      before { delete "/api/v2/storefront/favorites/empty", headers: headers }
+
+      it_behaves_like 'returns 403 HTTP status'
+    end
+  end
 end

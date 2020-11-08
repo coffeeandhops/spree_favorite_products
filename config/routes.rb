@@ -24,7 +24,9 @@ Spree::Core::Engine.routes.draw do
     namespace :v2 do
 
       namespace :storefront do
-        resources :favorites, only: [:show, :create, :destroy, :index]
+        resources :favorites, only: [:show, :create, :destroy, :index] do
+          delete :empty, on: :collection
+        end
       end
     end
   end
