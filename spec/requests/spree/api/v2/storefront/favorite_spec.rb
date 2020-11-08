@@ -177,11 +177,6 @@ describe 'Storefront API v2 Favorite spec', type: :request do
       before { delete "/api/v2/storefront/favorites/empty", headers: headers }
 
       it_behaves_like 'returns 403 HTTP status'
-      # it 'returns empty favorite' do
-      #   pp json_response
-      #   expect(json_response['data'].count).to eq(0)
-      # end
-      # expect(response.status).to eq(status_code)
     end
   end
 end
